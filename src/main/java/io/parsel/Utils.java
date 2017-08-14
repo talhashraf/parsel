@@ -2,12 +2,19 @@ package io.parsel;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
@@ -46,6 +53,20 @@ public class Utils {
         }
         return null;
     }
+    
+    public static String nodeToString(Node node) {
+        StringWriter stringWriter = new StringWriter();
+        try {
+            Transformer transformer = TransformerFactory.newInstance().newTransformer();
+            transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+            transformer.transform(new DOMSource(node), new StreamResult(stringWriter));
+        } catch (TransformerException e) {
+            LOG.severe(e.getMessage());
+        }
+        return stringWriter.toString();
+    }
+
+
 
     public static NodeList fromXpath(Node node, String xpath) {
         return (NodeList) fromXpath(node, xpath, XPathConstants.NODESET);
