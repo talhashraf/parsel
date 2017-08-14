@@ -102,8 +102,7 @@ public class SelectorList {
     public String toString() {
         String result = "[";
         String prepend_string = null;
-        for (int i = 0; i < this.size(); i++) {
-            Selector selector = this.get(i);
+        for (Selector selector: this.list) {
             if (prepend_string != null) {
                 result += prepend_string;
             }
