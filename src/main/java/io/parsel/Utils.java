@@ -3,6 +3,7 @@ package io.parsel;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -24,13 +25,14 @@ import org.xml.sax.SAXException;
 
 
 public class Utils {
+    private static final Logger LOG = Logger.getLogger("io.parsel.Utils");
     private static final XPath XPATH = XPathFactory.newInstance().newXPath();
 
     public static DocumentBuilder getDocumentBuilder() {
         try {
             return DocumentBuilderFactory.newInstance().newDocumentBuilder();
         } catch(ParserConfigurationException e) {
-            System.out.println(e.getMessage());
+            LOG.severe(e.getMessage());
         }
         return null;
     }
@@ -40,7 +42,7 @@ public class Utils {
             ByteArrayInputStream bais = new ByteArrayInputStream(text.getBytes());
             return (Node) getDocumentBuilder().parse(bais);
         } catch(IOException|SAXException e) {
-            System.out.println(e.getMessage());
+            LOG.severe(e.getMessage());
         }
         return null;
     }
@@ -53,7 +55,7 @@ public class Utils {
         try {
             return XPATH.evaluate(xpath, node, type);
         } catch(XPathExpressionException e) {
-            System.out.println(e.getMessage());
+            LOG.severe(e.getMessage());
         }
         return null;
     }
