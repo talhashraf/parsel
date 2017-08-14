@@ -42,7 +42,7 @@ public class SelectorTest {
     @Test public void testBool() {
         Selector selector = new Selector(html);
         Boolean is_true = selector.bool("//boolean");
-        assertEquals(true, is_true);
+        assertTrue(is_true);
     }
     
     @Test public void testNode() {
