@@ -88,7 +88,7 @@ public class SelectorList {
             Selector selector = this.get(i);
             strings[i] = selector.root.getNodeValue();
             if (strings[i] == null) {
-                strings[i] = selector.root.toString();
+                strings[i] = selector.text;
             }
         }
         return strings;
