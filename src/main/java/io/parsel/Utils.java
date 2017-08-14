@@ -25,8 +25,8 @@ import org.xml.sax.SAXException;
 
 /**
  * Basic utility functions used within the project.
- * 
- * 
+ *
+ *
  * @author Talha Ashraf
  */
 
@@ -53,7 +53,7 @@ public class Utils {
         }
         return null;
     }
-    
+
     public static String nodeToString(Node node) {
         StringWriter stringWriter = new StringWriter();
         try {
@@ -65,8 +65,6 @@ public class Utils {
         }
         return stringWriter.toString();
     }
-
-
 
     public static NodeList fromXpath(Node node, String xpath) {
         return (NodeList) fromXpath(node, xpath, XPathConstants.NODESET);
@@ -90,7 +88,7 @@ public class Utils {
     }
 
     public static String xPercentString(String text, int percent) {
-        int index = (text.length() / 100) * percent;
+        int index = (text.length() * percent) / 100;
         String remove_text = text.substring(index);
         return text.replace(remove_text, "");
     }
