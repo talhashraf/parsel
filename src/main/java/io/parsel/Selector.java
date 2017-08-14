@@ -22,7 +22,7 @@ public class Selector {
     }
 
     public Selector(Node root) {
-        this.text = null;
+        this.text = Utils.nodeToString(root);
         this.root = root;
     }
 
@@ -52,10 +52,7 @@ public class Selector {
 
     @Override
     public String toString() {
-        if (text == null) {
-            return String.format("<Selector name='%s'>", this.root.getNodeName());
-        }
-        return String.format("<Selector text='%s'>", Utils.xPercentString(text, 25));
+        return String.format("<Selector name='%s'>", this.root.getNodeName());
     }
 }
 
